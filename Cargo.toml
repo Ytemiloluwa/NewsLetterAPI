@@ -17,6 +17,7 @@ serde = { version = "1", features = ["derive"]}
 chrono = {verison = "0.4.38", default-features = false, features = ["clock"] }
 uuid = { version = "1.11.0", features = ["v4"] }
 config = "0.13.4"
+env_logger = "0.9.3"
 
 
 # Using table-like toml syntax to avoid a super-long line!
