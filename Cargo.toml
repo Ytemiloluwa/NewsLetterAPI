@@ -19,6 +19,7 @@ uuid = { version = "1.11.0", features = ["v4"] }
 config = "0.13.4"
 env_logger = "0.9.3"
 log = "0.4"
+tracing = { version = "0.1", features = ["log"]}
 
 # Using table-like toml syntax to avoid a super-long line!
 [dependencies.sqlx]
