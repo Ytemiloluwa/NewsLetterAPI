@@ -14,7 +14,7 @@ name = "NewsLetterAPI"
 actix-web = "4"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 serde = { version = "1", features = ["derive"]}
-chrono = {verison = "0.4.38", default-features = false, features = ["clock"] }
+chrono = "0.4"
 uuid = { version = "1.11.0", features = ["v4"] }
 config = "0.13.4"
 env_logger = "0.9.3"
