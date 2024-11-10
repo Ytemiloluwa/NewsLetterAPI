@@ -1,15 +1,19 @@
 use std::net::TcpListener;
 use NewsLetterAPI::startup::run;
 use NewsLetterAPI::configuration::get_configuration;
-use sqlx::PgPool;
-use tracing::subscriber::set_global_default;
+use NewsLetterAPI::telemetry::{get_subscriber, init_subscriber};
+use sqlx::postgres::PgPool;
+use tracing::{subscriber::set_global_default};
 use tracing_bunyan_formatter:: { BunyanFormattingLayer, JsonStorageLayer };
 use tracing_subscriber::{layer::SubscriberExt, EnvFilter, Registry};
 use tracing_log::LogTracer;
 
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
-    // Redirect all log's event to our subscriber
+
+    let subscriber = get_subscriber("NewsLetterAPI".into(), "info".into());
+    init_subscriber(subscriber);
+    // Redirect all log's event to the subscriber
     LogTracer::init().expect("Failed to set logger");
 
     let env_filter = EnvFilter::try_from_default_env()
@@ -32,6 +36,7 @@ async fn main() -> Result<(), std::io::Error> {
         .expect("Failed to connect to Postgres.");
     let address = format!("127.0.0.1:{}", configuration.application_port);
     let listener = TcpListener::bind(address)?;
-    run(listener, connection_pool)?.await
+    run(listener, connection_pool)?.await;
+    Ok(())
 
 }
