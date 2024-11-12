@@ -7,6 +7,7 @@ use tracing::{subscriber::set_global_default};
 use tracing_bunyan_formatter:: { BunyanFormattingLayer, JsonStorageLayer };
 use tracing_subscriber::{layer::SubscriberExt, EnvFilter, Registry};
 use tracing_log::LogTracer;
+use secrecy::ExposeSecret;
 
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
@@ -31,7 +32,7 @@ async fn main() -> Result<(), std::io::Error> {
 
     // Panic if it cant read configuration file
     let configuration = get_configuration().expect("Failed to read configuration.");
-    let connection_pool = PgPool::connect(&configuration.database.connection_string())
+    let connection_pool = PgPool::connect(&configuration.database.connection_string().expose_secret())
         .await
         .expect("Failed to connect to Postgres.");
     let address = format!("127.0.0.1:{}", configuration.application_port);
