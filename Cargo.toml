@@ -1,5 +1,5 @@
 [package]
-name = "NewsLetterAPI"
+name = "newsletterapi"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,7 +8,7 @@ path = "src/lib.rs"
 
 [[bin]]
 path = "src/main.rs"
-name = "NewsLetterAPI"
+name = "newsletterapi"
 
 [dependencies]
 actix-web = "4"

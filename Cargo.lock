@@ -3,29 +3,6 @@
 version = 3
 
 [[package]]
-name = "NewsLetterAPI"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "chrono",
- "config",
- "env_logger",
- "log",
- "once_cell",
- "reqwest",
- "secrecy",
- "serde",
- "sqlx",
- "tokio",
- "tracing",
- "tracing-actix-web",
- "tracing-bunyan-formatter",
- "tracing-log 0.1.4",
- "tracing-subscriber",
- "uuid",
-]
-
-[[package]]
 name = "actix-codec"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1402,6 +1379,29 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "tempfile",
+]
+
+[[package]]
+name = "newsletterapi"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "chrono",
+ "config",
+ "env_logger",
+ "log",
+ "once_cell",
+ "reqwest",
+ "secrecy",
+ "serde",
+ "sqlx",
+ "tokio",
+ "tracing",
+ "tracing-actix-web",
+ "tracing-bunyan-formatter",
+ "tracing-log 0.1.4",
+ "tracing-subscriber",
+ "uuid",
 ]
 
 [[package]]

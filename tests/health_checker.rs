@@ -1,8 +1,8 @@
 use std::net::TcpListener;
 use sqlx:: {Connection, Executor, PgConnection, PgPool} ;
-use NewsLetterAPI::configuration:: { get_configuration, DatabaseSettings};
+use newsletterapi::configuration:: { get_configuration, DatabaseSettings};
 use uuid::Uuid;
-use NewsLetterAPI::telemetry:: { get_subscriber, init_subscriber};
+use newsletterapi::telemetry:: { get_subscriber, init_subscriber};
 use once_cell::sync::Lazy;
 use secrecy::ExposeSecret;
 
@@ -39,7 +39,7 @@ async fn spawn_app() -> TestApp {
     configuration.database.database_name = Uuid::new_v4().to_string();
     let connection_pool = configure_database(&configuration.database).await;
 
-    let server = NewsLetterAPI::startup::run(listener, connection_pool.clone()).expect("Failed to bind address");
+    let server = newsletterapi::startup::run(listener, connection_pool.clone()).expect("Failed to bind address");
     let _ = tokio::spawn(server);
 
     TestApp {

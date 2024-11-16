@@ -1,7 +1,7 @@
 use std::net::TcpListener;
-use NewsLetterAPI::startup::run;
-use NewsLetterAPI::configuration::get_configuration;
-use NewsLetterAPI::telemetry::{get_subscriber, init_subscriber};
+use newsletterapi::startup::run;
+use newsletterapi::configuration::get_configuration;
+use newsletterapi::telemetry::{get_subscriber, init_subscriber};
 use sqlx::postgres::PgPool;
 use secrecy::ExposeSecret;
 
@@ -13,10 +13,12 @@ async fn main() -> Result<(), std::io::Error> {
 
     // Panic if it cant read configuration file
     let configuration = get_configuration().expect("Failed to read configuration.");
-    let connection_pool = PgPool::connect(&configuration.database.connection_string().expose_secret())
-        .await
+    let connection_pool = PgPool::connect_lazy(&configuration.database.connection_string().expose_secret())
         .expect("Failed to connect to Postgres.");
-    let address = format!("127.0.0.1:{}", configuration.application_port);
+    let address = format!(
+        "{}:{}",
+        configuration.application.host, configuration.application.port
+    );
     let listener = TcpListener::bind(address)?;
     run(listener, connection_pool)?.await;
     Ok(())
