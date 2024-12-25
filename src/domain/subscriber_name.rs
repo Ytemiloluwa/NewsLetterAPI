@@ -1,10 +1,5 @@
 use unicode_segmentation::UnicodeSegmentation;
 
-pub struct NewSubscriber {
-
-    pub email: String,
-    pub name: SubscriberName,
-}
 #[derive(Debug)]
 pub struct SubscriberName(String);
 impl SubscriberName {
@@ -63,8 +58,8 @@ mod tests {
     #[test]
     fn names_containing_an_invalid_character_are_rejected() {
         for name in &['/', '(', ')', '"', '<', '>', '\\', '{', '}'] {
-        let name = name.to_string();
-        assert_err!(SubscriberName::parse(name));
+            let name = name.to_string();
+            assert_err!(SubscriberName::parse(name));
 
         }
     }
