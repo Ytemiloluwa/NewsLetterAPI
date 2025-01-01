@@ -27,6 +27,7 @@ secrecy = { version = "0.8", features = ["serde"] }
 tracing-actix-web = "0.7"
 serde-aux = "4"
 unicode-segmentation = "1"
+validator = "0.16"
 
 
 # Using table-like toml syntax to avoid a super-long line!
